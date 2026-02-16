@@ -1,0 +1,40 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  sectionLabel?: string;
+}
+
+const { title, description, sectionLabel } = Astro.props;
+
+const hypothesisEnabled = import.meta.env.PUBLIC_HYPOTHESIS_ENABLED !== "false";
+const hypothesisGroup = import.meta.env.PUBLIC_HYPOTHESIS_GROUP;
+---
+
+<BaseLayout title={`${title} | Plan de trabajo CDE`} description={description}>
+  <article class="mx-auto w-full max-w-3xl">
+    {sectionLabel && (
+      <p class="mb-4 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-(--color-muted)">
+        {sectionLabel}
+      </p>
+    )}
+    <slot />
+  </article>
+
+  {
+    hypothesisEnabled && (
+      <>
+        {hypothesisGroup && (
+          <script is:inline define:vars={{ hypothesisGroup }}>
+            window.hypothesisConfig = function () {
+              return { group: hypothesisGroup };
+            };
+          </script>
+        )}
+        <script async src="https://hypothes.is/embed.js"></script>
+      </>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Dino";
+  src:
+    url("/fonts/dino/Dino-Regular.woff2") format("woff2"),
+    url("/fonts/dino/Dino-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dino";
+  src:
+    url("/fonts/dino/Dino-Italic.woff2") format("woff2"),
+    url("/fonts/dino/Dino-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dino";
+  src:
+    url("/fonts/dino/Dino-Heavy.woff2") format("woff2"),
+    url("/fonts/dino/Dino-Heavy.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Dino";
+  src:
+    url("/fonts/dino/Dino-HeavyItalic.woff2") format("woff2"),
+    url("/fonts/dino/Dino-HeavyItalic.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src:
+    url("/fonts/crimson-pro/CrimsonPro-VariableFont_wght.ttf")
+      format("truetype-variations"),
+    url("/fonts/crimson-pro/CrimsonPro-Regular.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src:
+    url("/fonts/crimson-pro/CrimsonPro-Italic-VariableFont_wght.ttf")
+      format("truetype-variations"),
+    url("/fonts/crimson-pro/CrimsonPro-Italic.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src: url("/fonts/crimson-pro/CrimsonPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src: url("/fonts/crimson-pro/CrimsonPro-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "Dino", "Avenir Next", "Segoe UI", sans-serif;
+  --font-serif: "Crimson Pro", "Iowan Old Style", "Times New Roman", serif;
+}

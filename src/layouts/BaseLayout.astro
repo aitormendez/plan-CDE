@@ -1,0 +1,33 @@
+---
+import "../styles/main.css";
+import Nav from "../components/Nav.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Plan de trabajo CDE",
+  description = "Documentación de trabajo para el plan y la configuración integral del proyecto CDE."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <Nav />
+    <main class="mx-auto w-full max-w-6xl px-4 py-10 md:px-6 md:py-12">
+      <slot />
+    </main>
+  </body>
+</html>

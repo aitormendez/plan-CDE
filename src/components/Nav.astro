@@ -1,0 +1,161 @@
+---
+import { getCollection } from "astro:content";
+
+const normalizePath = (path: string) => {
+  if (path !== "/" && path.endsWith("/")) {
+    return path.slice(0, -1);
+  }
+  return path;
+};
+
+const currentPath = normalizePath(Astro.url.pathname);
+
+const reportItems = (await getCollection("reports"))
+  .sort((first, second) => first.data.order - second.data.order)
+  .map((entry) => ({
+    label: entry.data.title,
+    href: `/informes/${entry.slug}`
+  }));
+
+const isActive = (href: string) => currentPath === normalizePath(href);
+const basePath = "/informes";
+const groupActive =
+  currentPath === basePath || reportItems.some((item) => isActive(item.href));
+---
+
+<header
+  class="sticky top-0 z-20 border-b border-(--color-border) bg-[color-mix(in_oklab,var(--color-bg),transparent_8%)] font-sans backdrop-blur"
+>
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-4 px-4 py-4 md:px-6"
+  >
+    <a
+      href="/"
+      class="text-sm font-semibold uppercase tracking-[0.12em] text-(--color-text)"
+    >
+      Plan de trabajo CDE
+    </a>
+
+    <button
+      type="button"
+      class="ml-auto inline-flex items-center justify-center rounded-md border border-(--color-border) px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-(--color-text) transition hover:border-(--color-accent) hover:text-(--color-accent) focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-accent) md:hidden"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      Menú
+    </button>
+
+    <nav
+      id="primary-navigation"
+      data-menu-root
+      class="hidden w-full md:ml-auto md:block md:w-auto"
+      aria-label="Navegación principal"
+    >
+      <ul class="flex flex-col gap-3 md:flex-row md:items-center md:gap-4">
+        <li class="relative">
+          <details class="group/nav" open={groupActive} data-nav-group>
+            <summary
+              class:list={[
+                "flex cursor-pointer list-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition marker:content-['']",
+                groupActive
+                  ? "text-(--color-accent)"
+                  : "text-(--color-text) hover:text-(--color-accent)"
+              ]}
+              aria-haspopup="true"
+            >
+              <span>Informes</span>
+              <svg
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                class="h-3 w-3 transition-transform group-open/nav:rotate-180"
+              >
+                <path
+                  d="M3.5 6.5L8 11l4.5-4.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </summary>
+
+            <ul class="mt-2 grid gap-1 border-t border-(--color-border) pt-2 md:absolute md:right-0 md:left-auto md:z-20 md:mt-1 md:min-w-56 md:max-w-[calc(100vw-1rem)] md:rounded md:border md:border-(--color-border) md:bg-(--color-surface) md:p-2 md:shadow-[0_12px_40px_rgba(0,0,0,0.35)] xl:left-0 xl:right-auto xl:max-w-none">
+              <li>
+                <a
+                  href={basePath}
+                  class:list={[
+                    "block whitespace-normal rounded-md px-3 py-2 text-sm transition",
+                    isActive(basePath)
+                      ? "bg-(--color-panel) text-(--color-accent)"
+                      : "text-(--color-text) hover:bg-(--color-panel) hover:text-(--color-accent)"
+                  ]}
+                >
+                  Índice
+                </a>
+              </li>
+              {reportItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "block whitespace-normal rounded-md px-3 py-2 text-sm transition",
+                      isActive(item.href)
+                        ? "bg-(--color-panel) text-(--color-accent)"
+                        : "text-(--color-text) hover:bg-(--color-panel) hover:text-(--color-accent)"
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const menuRoot = document.querySelector("[data-menu-root]");
+  const group = document.querySelector("[data-nav-group]");
+
+  if (
+    menuToggle instanceof HTMLButtonElement &&
+    menuRoot instanceof HTMLElement
+  ) {
+    menuToggle.addEventListener("click", () => {
+      const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!expanded));
+      menuRoot.classList.toggle("hidden", expanded);
+    });
+
+    menuRoot.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.matchMedia("(max-width: 767px)").matches) {
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuRoot.classList.add("hidden");
+        }
+      });
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Node)) {
+      return;
+    }
+
+    if (group instanceof HTMLElement && !group.contains(event.target)) {
+      group.removeAttribute("open");
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && group instanceof HTMLElement) {
+      group.removeAttribute("open");
+    }
+  });
+</script>

@@ -1,0 +1,54 @@
+:root {
+  --color-bg: #090b11;
+  --color-surface: #111723;
+  --color-panel: #161d2b;
+  --color-border: #273247;
+  --color-text: #d2d6df;
+  --color-muted: #8fa1c1;
+  --color-accent: #6cd2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(108, 210, 255, 0.12),
+      transparent 36%
+    ),
+    radial-gradient(circle at 85% 0%, rgba(106, 91, 255, 0.14), transparent 42%);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}

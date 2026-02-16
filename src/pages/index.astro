@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const reports = (await getCollection("reports")).sort(
+  (first, second) => first.data.order - second.data.order
+);
+---
+
+<BaseLayout
+  title="Plan de trabajo CDE | Hub documental"
+  description="Portal de informes para el plan de comunicación y la extensión de configuración del proyecto CDE."
+>
+  <section
+    class="grid gap-5 rounded border border-(--color-border) bg-(--color-surface) p-6 md:p-8"
+  >
+    <p
+      class="text-xs font-semibold uppercase tracking-[0.2em] text-(--color-muted)"
+    >
+      Proyecto
+    </p>
+    <h1 class="text-3xl font-semibold tracking-tight md:text-4xl">
+      Plan de trabajo CDE
+    </h1>
+    <p class="max-w-3xl text-sm text-(--color-muted) md:text-base">
+      Este espacio documenta el plan de comunicación y su extensión para
+      configurar el proyecto completo.
+    </p>
+  </section>
+
+  <section class="mt-8">
+    <a
+      href="/informes"
+      class="block rounded-xl border border-(--color-border) bg-(--color-surface) p-5 transition hover:border-(--color-accent)"
+    >
+      <p
+        class="text-xs font-semibold uppercase tracking-[0.14em] text-(--color-muted)"
+      >
+        Informes
+      </p>
+      <p class="mt-2 text-lg font-medium">{reports.length} documento(s)</p>
+      <p class="mt-2 text-sm text-(--color-muted)">
+        Listado unificado de informes de trabajo y decisiones del proyecto.
+      </p>
+    </a>
+  </section>
+</BaseLayout>
