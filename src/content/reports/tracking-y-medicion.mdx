@@ -1,0 +1,84 @@
+---
+title: "Tracking y medicion"
+order: 3
+summary: "UTMs, Matomo, objetivos y estandar de enlaces para medir sin friccion."
+---
+
+Versión: v0.1 (borrador)  
+Fecha: 2026-02-17
+
+## Objetivo
+
+Definir un sistema de medicion simple y consistente para:
+- saber de donde viene el trafico,
+- medir conversiones (micro y macro),
+- poder iterar con datos (sin improvisar enlaces ni campanas).
+
+Este documento define el **como medir**. Para el **cuando**, ver `/informes/roadmap-timing`.
+
+---
+
+## 1) Convencion de UTMs (estandar)
+
+Usaremos UTMs en todos los enlaces que salgan de redes, YouTube y Telegram hacia la web.
+
+Parametros:
+- `utm_source`: plataforma concreta (`instagram`, `tiktok`, `youtube`, `telegram`, `x`).
+- `utm_medium`: tipo de trafico (`organic_social`, `community`).
+- `utm_campaign`: nombre estable por ola de trabajo (ej. `cde_launch_wave1`).
+- `utm_content`: ID de pieza (ej. `sabias_0007`, `mapa_0012`).
+
+Ejemplo:
+
+`https://espaciosutil.org/niveles-de-membresia/?utm_source=instagram&utm_medium=organic_social&utm_campaign=cde_launch_wave1&utm_content=sabias_0007`
+
+Reglas:
+- `utm_campaign` no cambia dentro de una ola (4-8 semanas).
+- `utm_content` es obligatorio en shorts y piezas individuales.
+- No inventar valores. Si aparece un nuevo canal, se anade al estandar.
+
+---
+
+## 2) Hub de enlaces y redirecciones (opcional)
+
+Para reducir friccion:
+- un hub tipo "enlace en perfil" en la propia web (URL estable),
+- enlaces internos con UTMs para cada plataforma,
+- (opcional) redirecciones cortas si se necesita cambiar destinos sin romper enlaces.
+
+---
+
+## 3) Matomo: instalacion y configuracion minima
+
+Decision: Matomo autohospedado.
+
+Checklist:
+1. Crear sitio `espaciosutil.org` en Matomo.
+2. Instalar el snippet de tracking en WordPress y validar en "Visitors in Real-time".
+3. Configurar privacidad basica (anonimizar IP, retencion).
+4. Definir objetivos (Goals).
+
+---
+
+## 4) Objetivos (Goals) recomendados
+
+Minimo viable:
+- Micro: visita a checkout (o click hacia checkout).
+- Macro: suscripcion completada (URL de confirmacion o evento).
+
+Si hace falta mas detalle:
+- registro/leccion gratuita,
+- click en Telegram (entrada/salida),
+- scroll o tiempo en pagina en landing del curso.
+
+---
+
+## 5) Reporting y rutina semanal
+
+Ritmo recomendado:
+- 1 vez por semana: revisar acquisition (campaign/source/content) y conversiones.
+- 1 vez por semana: revisar retencion de shorts y CTR (plataforma) y cruzar con trafico web.
+
+Entregable operativo:
+- hoja `.ods` con columnas: fecha, plataforma, `utm_content`, URL final, tema, CTA, resultados.
+

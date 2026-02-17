@@ -1,0 +1,62 @@
+---
+title: "Roadmap y timing"
+order: 1
+summary: "Etapas, dependencias y calendario orientativo para ejecutar web, medicion y produccion de contenido."
+---
+
+Versión: v0.1 (borrador)  
+Fecha: 2026-02-16
+
+## Objetivo
+
+Organizar el trabajo por etapas para que la ejecucion sea **manejable**, con dependencias claras,
+responsables y un calendario realista.
+
+Este documento define el **cuando**. Para el **como** del plan editorial y de canales, ver:
+- `/informes/plan-comunicacion-cde`
+- `/informes/tracking-y-medicion`
+
+---
+
+## Etapa 0 (Semana 1-2) — Base web: navegacion + suscripcion unica + checkout
+
+En esta etapa se resuelve la base operativa del producto: navegacion y acceso.
+
+Entregables:
+- Estructura de navegacion final (sin competencia entre contenidos editoriales y curso).
+- Suscripcion unica definida (un plan da acceso a todo).
+- Checkout y pasarela de pago operativos (PMPro + Stripe) con entorno de pruebas.
+
+Criterio de "done":
+- Un usuario nuevo puede descubrir el curso, ver una leccion gratuita (si aplica), y completar el pago.
+- Tras pagar, accede a lecciones restringidas sin friccion.
+
+---
+
+## Etapa 1 (Semana 2-3) — Medicion: Matomo + UTMs + objetivos
+
+Entregables:
+- Matomo funcionando (autohospedado) y registrando sesiones.
+- Convencion de UTMs definida y aplicada al "hub" principal.
+- Objetivos minimos configurados (checkout, suscripcion completada, etc.).
+
+Dependencias:
+- Etapa 0 lista (URLs estables y checkout funcionando).
+
+---
+
+## Etapa 2 (Semana 3-6) — Produccion: sistema + primera bateria de shorts
+
+Entregables:
+- Plantillas v1 (diseno + edicion).
+- Backlog operativo (hoja de tracking) y convenciones de IDs por pieza.
+- Primera bateria publicada (cadencia inicial).
+
+---
+
+## Etapa 3 (continuo) — Publicar, medir e iterar
+
+Rutina:
+- Publicar segun cadencia acordada.
+- Revisar metricas y ajustar.
+- Ajustar navegacion/landings si hay fricciones reales.
