@@ -42,6 +42,7 @@ PUBLIC_HYPOTHESIS_ENABLED=true
 Configurar el proyecto con:
 
 - Build command: `pnpm build`
+- Dev command: `pnpm dev`
 - Build output directory: `dist`
 - Install command: `pnpm install`
 - Environment variable (si aplica): `PUBLIC_HYPOTHESIS_GROUP`
