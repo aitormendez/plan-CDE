@@ -1,69 +1,76 @@
 ---
 title: "Roadmap y timing"
-order: 1
-summary: "Etapas, dependencias y calendario orientativo para ejecutar web, medicion y produccion de contenido."
+order: 4
+summary: "Etapas, dependencias y calendario orientativo para ejecutar web, medición y producción de contenido."
 ---
 
-Versión: v0.1 (borrador)  
-Fecha: 2026-02-16
+Versión: v0.2 (alineado con el plan simplificado)  
+Fecha: 2026-02-24
 
 ## Objetivo
 
-Organizar el trabajo por etapas para que la ejecucion sea **manejable**, con dependencias claras,
+Organizar el trabajo por etapas para que la ejecución sea **manejable**, con dependencias claras,
 responsables y un calendario realista.
 
-Este documento define el **cuando**. Para el **como** del plan editorial y de canales, ver:
+Este documento define el **cuándo**. Para el **cómo** del plan editorial y de canales, ver:
 - `/informes/plan-comunicacion-cde`
 - `/informes/tracking-y-medicion`
+- `/informes/messaging-v1`
+- `/informes/voc-youtube-urantia`
 
 ---
 
-## Etapa 0 (Semana 1-2) — Base web: navegacion + suscripcion unica + checkout
+## Etapa 0 (Semana 1-2) — Base web: navegación + suscripción única + checkout
 
-En esta etapa se resuelve la base operativa del producto: navegacion y acceso.
+En esta etapa se resuelve la base operativa del producto: navegación y acceso.
 
 Entregables:
-- Estructura de navegacion final (sin competencia entre contenidos editoriales y curso).
-- Suscripcion unica definida (un plan da acceso a todo).
+- Hub "enlace en perfil" publicado (URL estable, móvil primero).
+- Estructura de navegación final (sin competencia entre contenidos editoriales y curso).
+- Suscripción única definida (un plan da acceso a todo).
+- Lección gratuita definida y accesible (si aplica en esta etapa).
 - Checkout y pasarela de pago operativos (PMPro + Stripe) con entorno de pruebas.
 
 Criterio de "done":
-- Un usuario nuevo puede descubrir el curso, ver una leccion gratuita (si aplica), y completar el pago.
-- Tras pagar, accede a lecciones restringidas sin friccion.
+- Un usuario nuevo puede descubrir el curso, ver la lección gratuita y entender "cómo empezar".
+- Puede completar el pago en móvil sin fricción.
+- Tras pagar, accede a lecciones restringidas sin fricción.
 
 ---
 
-## Etapa 1 (Semana 2-3) — Medicion: Matomo + UTMs + objetivos
+## Etapa 1 (Semana 2-3) — Medición: Matomo + UTMs + objetivos
 
 Entregables:
 - Matomo funcionando (autohospedado) y registrando sesiones.
-- Convencion de UTMs definida y aplicada al "hub" principal.
-- Objetivos minimos configurados (checkout, suscripcion completada, etc.).
+- Convención de UTMs definida y aplicada al hub principal.
+- Objetivos mínimos configurados (checkout, suscripción completada, etc.).
 
 Dependencias:
 - Etapa 0 lista (URLs estables y checkout funcionando).
 
 ---
 
-## Etapa 2 (Semana 3-6) — Produccion: sistema + primera bateria de shorts
+## Etapa 2 (Semana 3-6) — Producción: sistema + primeras 2 semanas publicadas
 
 Entregables:
-- Prospeccion de mercado con ChatGPT Deep Research (insights para temas, objeciones y lenguaje).
-- Plantillas v1 (diseno + edicion).
-- Backlog operativo (hoja de tracking) y convenciones de IDs por pieza.
-- Primera bateria publicada (cadencia inicial).
+- `Messaging v1` operativo (1 página) para consistencia de promesa/objeciones/pruebas/CTA.
+- Proto-VOC iniciado y ritual semanal (sin research pesado).
+- Plantillas v1 de vídeo (Remotion o DaVinci) listas para iterar.
+- Hoja de tracking y convención de IDs por pieza.
+- Primer ciclo publicado (2 semanas a 2 shorts/semana + 1 Telegram/semana).
 
-Referencia de ritmo (sin detalle operativo):
-- Semanas 1-2: 2 shorts/semana + Telegram 1-2/semana.
-- Semanas 3-4: 3 shorts/semana + Telegram 2/semana.
-- Semana 5+: 4 shorts/semana + Telegram 2-3/semana.
-- Pico (si hay buffer): 5 shorts/semana de forma temporal.
+Ritmo recomendado (realista y sostenible):
+- Base: 2 shorts/semana + 1 Telegram/semana.
+- Subida opcional (solo si hay buffer estable): 3 shorts/semana.
 
 ---
 
 ## Etapa 3 (continuo) — Publicar, medir e iterar
 
 Rutina:
-- Publicar segun cadencia acordada.
-- Revisar metricas y ajustar.
-- Ajustar navegacion/landings si hay fricciones reales.
+- Publicar según cadencia acordada.
+- Revisar métricas (30 min/semana) y ajustar una variable por iteración.
+- Ajustar navegación/landing/hub si hay fricciones reales.
+
+Opcional (cuando aporte señal real):
+- Prospección/Deep Research orientado a lenguaje y objeciones (no por completismo).
