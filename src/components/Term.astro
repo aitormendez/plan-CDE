@@ -1,0 +1,31 @@
+---
+import { glossary } from "../data/glossary";
+
+interface Props {
+  id: keyof typeof glossary;
+  label?: string;
+}
+
+const { id, label } = Astro.props as Props;
+const entry = glossary[id];
+
+if (!entry) {
+  throw new Error(`Unknown glossary term: ${String(id)}`);
+}
+
+const visibleLabel = label ?? entry.label;
+const tooltipId = `term-tip-${id}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class="term-tip">
+  <button
+    type="button"
+    class="term-trigger"
+    aria-describedby={tooltipId}
+  >
+    {visibleLabel}
+  </button>
+  <span id={tooltipId} role="tooltip" class="term-panel">
+    {entry.definition}
+  </span>
+</span>

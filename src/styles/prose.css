@@ -1,6 +1,9 @@
 .prose {
   display: grid;
   gap: 1rem;
+  --prose-breakout-padding: 1rem;
+  --prose-wide-width: min(72rem, calc(100vw - (var(--prose-breakout-padding) * 2)));
+  --prose-full-width: calc(100vw - (var(--prose-breakout-padding) * 2));
   font-family: var(--font-serif);
   font-weight: 200;
   font-size: 1.5rem;
@@ -138,4 +141,118 @@
 
 .prose :where(strong):not(:where(.not-prose, .not-prose *)) {
   font-weight: 600;
+}
+
+.prose :where(.term-tip):not(:where(.not-prose, .not-prose *)) {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+.prose :where(.term-trigger):not(:where(.not-prose, .not-prose *)) {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: help;
+  border-bottom: 1px dotted color-mix(in oklab, var(--color-accent), white 15%);
+}
+
+.prose :where(.term-trigger:hover):not(:where(.not-prose, .not-prose *)) {
+  color: var(--color-accent);
+}
+
+.prose :where(.term-trigger:focus-visible):not(:where(.not-prose, .not-prose *)) {
+  outline: 2px solid color-mix(in oklab, var(--color-accent), white 15%);
+  outline-offset: 2px;
+  border-bottom-color: transparent;
+}
+
+.prose :where(.term-panel):not(:where(.not-prose, .not-prose *)) {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.55rem);
+  z-index: 20;
+  width: min(20rem, calc(100vw - 2rem));
+  transform: translateX(-50%) translateY(4px);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-panel), black 2%);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  padding: 0.6rem 0.75rem;
+  color: color-mix(in oklab, var(--color-text), #cbd5e1 10%);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-wrap: pretty;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.prose :where(.term-tip:hover .term-panel, .term-tip:focus-within .term-panel):not(
+    :where(.not-prose, .not-prose *)
+  ) {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.prose :where(table):not(:where(.not-prose, .not-prose *)) {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  table-layout: auto;
+}
+
+.prose :where(th, td):not(:where(.not-prose, .not-prose *)) {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.35;
+  vertical-align: top;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+}
+
+.prose :where(th):not(:where(.not-prose, .not-prose *)) {
+  background: color-mix(in oklab, var(--color-surface), black 6%);
+  font-weight: 600;
+  text-align: left;
+}
+
+.prose > :where(.prose-wide, .prose-full, table.prose-wide, table.prose-full):not(
+    :where(.not-prose, .not-prose *)
+  ) {
+  max-width: none;
+}
+
+.prose > :where(.prose-wide, table.prose-wide):not(:where(.not-prose, .not-prose *)) {
+  width: var(--prose-wide-width);
+  margin-inline: calc(50% - (var(--prose-wide-width) / 2));
+}
+
+.prose > :where(.prose-full, table.prose-full):not(:where(.not-prose, .not-prose *)) {
+  width: var(--prose-full-width);
+  margin-inline: calc(50% - (var(--prose-full-width) / 2));
+}
+
+@media (min-width: 768px) {
+  .prose {
+    --prose-breakout-padding: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose :where(.term-panel):not(:where(.not-prose, .not-prose *)) {
+    transition: none;
+  }
 }
