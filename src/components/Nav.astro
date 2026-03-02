@@ -10,6 +10,13 @@ const normalizePath = (path: string) => {
 
 const currentPath = normalizePath(Astro.url.pathname);
 
+const planItems = (await getCollection("plan"))
+  .sort((first, second) => first.data.order - second.data.order)
+  .map((entry) => ({
+    label: entry.data.title,
+    href: `/plan/${entry.slug}`
+  }));
+
 const reportItems = (await getCollection("reports"))
   .sort((first, second) => first.data.order - second.data.order)
   .map((entry) => ({
@@ -18,9 +25,14 @@ const reportItems = (await getCollection("reports"))
   }));
 
 const isActive = (href: string) => currentPath === normalizePath(href);
-const basePath = "/informes";
-const groupActive =
-  currentPath === basePath || reportItems.some((item) => isActive(item.href));
+
+const planPath = "/plan";
+const planGroupActive =
+  currentPath === planPath || planItems.some((item) => isActive(item.href));
+
+const reportPath = "/informes";
+const reportGroupActive =
+  currentPath === reportPath || reportItems.some((item) => isActive(item.href));
 ---
 
 <header
@@ -58,7 +70,68 @@ const groupActive =
             <summary
               class:list={[
                 "flex cursor-pointer list-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition marker:content-['']",
-                groupActive
+                planGroupActive
+                  ? "text-(--color-accent)"
+                  : "text-(--color-text) hover:text-(--color-accent)"
+              ]}
+              aria-haspopup="true"
+            >
+              <span>Plan</span>
+              <svg
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                class="h-3 w-3 transition-transform group-open/nav:rotate-180"
+              >
+                <path
+                  d="M3.5 6.5L8 11l4.5-4.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </summary>
+
+            <ul class="mt-2 grid gap-1 border-t border-(--color-border) pt-2 md:absolute md:right-0 md:left-auto md:z-20 md:mt-1 md:min-w-56 md:max-w-[calc(100vw-1rem)] md:rounded md:border md:border-(--color-border) md:bg-(--color-surface) md:p-2 md:shadow-[0_12px_40px_rgba(0,0,0,0.35)] xl:left-0 xl:right-auto xl:max-w-none">
+              <li>
+                <a
+                  href={planPath}
+                  class:list={[
+                    "block whitespace-normal rounded-md px-3 py-2 text-sm transition",
+                    isActive(planPath)
+                      ? "bg-(--color-panel) text-(--color-accent)"
+                      : "text-(--color-text) hover:bg-(--color-panel) hover:text-(--color-accent)"
+                  ]}
+                >
+                  Índice
+                </a>
+              </li>
+              {planItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "block whitespace-normal rounded-md px-3 py-2 text-sm transition",
+                      isActive(item.href)
+                        ? "bg-(--color-panel) text-(--color-accent)"
+                        : "text-(--color-text) hover:bg-(--color-panel) hover:text-(--color-accent)"
+                    ]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </li>
+
+        <li class="relative">
+          <details class="group/nav" data-nav-group>
+            <summary
+              class:list={[
+                "flex cursor-pointer list-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition marker:content-['']",
+                reportGroupActive
                   ? "text-(--color-accent)"
                   : "text-(--color-text) hover:text-(--color-accent)"
               ]}
@@ -84,10 +157,10 @@ const groupActive =
             <ul class="mt-2 grid gap-1 border-t border-(--color-border) pt-2 md:absolute md:right-0 md:left-auto md:z-20 md:mt-1 md:min-w-56 md:max-w-[calc(100vw-1rem)] md:rounded md:border md:border-(--color-border) md:bg-(--color-surface) md:p-2 md:shadow-[0_12px_40px_rgba(0,0,0,0.35)] xl:left-0 xl:right-auto xl:max-w-none">
               <li>
                 <a
-                  href={basePath}
+                  href={reportPath}
                   class:list={[
                     "block whitespace-normal rounded-md px-3 py-2 text-sm transition",
-                    isActive(basePath)
+                    isActive(reportPath)
                       ? "bg-(--color-panel) text-(--color-accent)"
                       : "text-(--color-text) hover:bg-(--color-panel) hover:text-(--color-accent)"
                   ]}
@@ -121,7 +194,7 @@ const groupActive =
 <script is:inline>
   const menuToggle = document.querySelector("[data-menu-toggle]");
   const menuRoot = document.querySelector("[data-menu-root]");
-  const group = document.querySelector("[data-nav-group]");
+  const groups = Array.from(document.querySelectorAll("[data-nav-group]"));
 
   if (
     menuToggle instanceof HTMLButtonElement &&
@@ -148,14 +221,20 @@ const groupActive =
       return;
     }
 
-    if (group instanceof HTMLElement && !group.contains(event.target)) {
-      group.removeAttribute("open");
-    }
+    groups.forEach((group) => {
+      if (group instanceof HTMLElement && !group.contains(event.target)) {
+        group.removeAttribute("open");
+      }
+    });
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && group instanceof HTMLElement) {
-      group.removeAttribute("open");
+    if (event.key === "Escape") {
+      groups.forEach((group) => {
+        if (group instanceof HTMLElement) {
+          group.removeAttribute("open");
+        }
+      });
     }
   });
 </script>

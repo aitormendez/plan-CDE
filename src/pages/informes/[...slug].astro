@@ -3,21 +3,48 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import DocumentLayout from "../../layouts/DocumentLayout.astro";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("reports");
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry }
-  }));
+  const reportEntries = await getCollection("reports");
+  const reportSlugs = new Set(reportEntries.map((entry) => entry.slug));
+  const planEntries = await getCollection("plan");
+
+  return [
+    ...reportEntries.map((entry) => ({
+      params: { slug: entry.slug },
+      props: {
+        type: "report" as const,
+        entry
+      }
+    })),
+    ...planEntries
+      .filter((entry) => !reportSlugs.has(entry.slug))
+      .map((entry) => ({
+        params: { slug: entry.slug },
+        props: {
+          type: "legacy-plan" as const,
+          redirectTo: `/plan/${entry.slug}`
+        }
+      }))
+  ];
 }
 
-const { entry } = Astro.props as { entry: CollectionEntry<"reports"> };
+type PageProps =
+  | { type: "report"; entry: CollectionEntry<"reports"> }
+  | { type: "legacy-plan"; redirectTo: string };
+
+const pageProps = Astro.props as PageProps;
+
+if (pageProps.type === "legacy-plan") {
+  return Astro.redirect(pageProps.redirectTo, 301);
+}
+
+const { entry } = pageProps;
 const { Content } = await render(entry);
 ---
 
 <DocumentLayout
   title={entry.data.title}
   description={entry.data.summary}
-  sectionLabel="Informe"
+  sectionLabel="Informe de progreso"
 >
   {entry.data.summary && (
     <p class="mb-4 font-sans text-sm text-(--color-muted)">{entry.data.summary}</p>

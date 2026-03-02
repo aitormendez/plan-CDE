@@ -2,20 +2,20 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const entries = (await getCollection("reports")).sort(
+const entries = (await getCollection("plan")).sort(
   (first, second) => first.data.order - second.data.order
 );
 ---
 
 <BaseLayout
-  title="Informes | Plan de trabajo CDE"
-  description="Listado de informes de progreso del plan de trabajo CDE."
+  title="Plan | Plan de trabajo CDE"
+  description="Listado del plan de trabajo CDE."
 >
   <section class="mx-auto max-w-4xl">
-    <h1 class="text-3xl font-semibold tracking-tight md:text-4xl">Informes</h1>
+    <h1 class="text-3xl font-semibold tracking-tight md:text-4xl">Plan</h1>
     <p class="mt-3 text-sm text-(--color-muted) md:text-base">
-      Informes de progreso sobre cambios aplicados en el sitio y evolución del
-      plan de trabajo.
+      Documentos estratégicos y operativos para el plan de comunicación y la
+      extensión de configuración del proyecto.
     </p>
 
     <ul class="mt-8 grid gap-3">
@@ -23,7 +23,7 @@ const entries = (await getCollection("reports")).sort(
         entries.map((entry) => (
           <li>
             <a
-              href={`/informes/${entry.slug}`}
+              href={`/plan/${entry.slug}`}
               class="block rounded border border-(--color-border) bg-(--color-surface) px-5 py-4 transition hover:border-(--color-accent)"
             >
               <p class="text-lg font-medium">{entry.data.title}</p>
