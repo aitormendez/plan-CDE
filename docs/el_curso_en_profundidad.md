@@ -1,0 +1,197 @@
+# El curso en profundidad
+
+## Nota de enfoque
+
+- Label de menú: `Programa`
+- Slug: `/el-curso-en-profundidad/`
+- Esta página debe funcionar como página de profundización sobre el programa, no como una segunda landing ni como una segunda página de membresía.
+- Su columna vertebral debe ser el contenido de `el_curso_en_profundidad.source.txt`.
+- Aquí interesa explicar la arquitectura del CDE: qué tipo de programa es, cómo se despliega en el tiempo, sobre qué materiales trabaja y con qué herramientas se estudia.
+- Reducir al mínimo los elementos de captación:
+  - no abrir con varios CTAs
+  - no duplicar secciones tipo `para quién`, `cómo empezar`, `FAQ comercial` o `planes`
+  - dejar, como mucho, un CTA discreto al final
+
+## 1. Apertura: qué es el CDE
+
+- Presentar el Curso de Desarrollo Espiritual como una propuesta formativa rigurosa y ordenada para acompañar un proceso real de comprensión espiritual.
+- Mantener la idea de guía estructurada y progresiva para buscadores comprometidos, pero sin convertir la apertura en una gran promesa épica.
+- Aclaración breve que ayude a situar la página:
+  - no es un curso de autoayuda
+  - no es una colección de inspiraciones sueltas
+  - es un programa de estudio y profundización
+- Formato sugerido: un bloque introductorio breve, sobrio y con tono de programa.
+
+## 2. La propuesta en tres fases
+
+- Esta debe ser la sección principal de la página.
+- Conviene diseñarla como tres bloques o cards amplias, porque aquí está el verdadero núcleo del documento fuente.
+- Pero no deben presentarse las tres fases con el mismo peso de disponibilidad.
+- Es importante indicar con total claridad en qué fase se encuentra hoy el proyecto para no inducir a error.
+
+### Fase 1. Comentarios temáticos por texto revelado
+
+- Explicar que la primera fase consiste en grabaciones en video y audio que comentan en profundidad las enseñanzas organizadas de cada texto espiritual trabajado en Espacio Sutil.
+- Dar peso a la idea de que Iván Prospector no improvisa sobre el texto, sino que parte de una organización sistemática previa elaborada por él mismo.
+- Incluir la nota importante del documento fuente:
+  - no se trata de una simple lectura comentada
+  - se trata de una exposición ordenada de enseñanzas seleccionadas y estructuradas con visión pedagógica
+- Aquí puede añadirse una precisión editorial útil:
+  - en el estado actual del lanzamiento, el núcleo trabajado de forma más visible es Urantia + Seth
+
+### Fase 2. Integración de enseñanzas entre textos
+
+- Explicar que esta fase reúne y sintetiza los contenidos trabajados por separado en la primera fase.
+- Dar aquí todo el peso a la idea de armonización:
+  - mostrar cómo distintas revelaciones pueden iluminarse entre sí
+  - resolver aparentes contradicciones entre textos
+  - construir una visión más global y coherente de la espiritualidad revelada
+- Esta fase debería presentarse como una de las claves diferenciales del programa, porque va más allá del comentario aislado de cada obra.
+
+### Fase 3. Curso completo estructurado en niveles
+
+- Explicar que el desarrollo completo del CDE toma forma como un programa progresivo de cuatro niveles:
+  - Iniciación
+  - Desarrollo
+  - Avanzado
+  - Maestría
+- Añadir el matiz importante:
+  - los dos primeros niveles serán comunes
+  - a partir de Avanzado podrá haber especialización por áreas
+- Esta fase debe presentarse como la arquitectura global del programa, no como una promesa de disponibilidad inmediata de todo ese recorrido.
+
+## 2.1. Estado actual del programa
+
+- Añadir dentro de esta misma zona una indicación editorial muy visible sobre el estado real del curso.
+- Mensaje recomendado:
+  - `Actualmente, el CDE se encuentra en la primera fase de desarrollo, con el núcleo visible centrado en comentarios temáticos y estudio guiado de Urantia y Seth.`
+- La segunda y la tercera fase deben presentarse como desarrollo previsto o arquitectura de evolución del programa.
+- Fórmulas útiles para titular o etiquetar:
+  - `Disponible ahora`
+  - `Fase actual`
+  - `En desarrollo`
+  - `Visión del programa`
+- Recursos gráficos recomendados para evitar confusión:
+  - dar máximo contraste y protagonismo a la fase actual
+  - atenuar visualmente las fases futuras
+  - separar las fases futuras con una banda, recuadro o fondo distinto
+  - añadir labels explícitos del tipo `Actualmente disponible` frente a `Próxima etapa`
+  - evitar botones de acción dentro de las fases futuras
+- Si se usa una línea temporal o tres cards, la lectura debería dejar una impresión inequívoca:
+  - hoy puede accederse a la fase 1
+  - las fases 2 y 3 explican hacia dónde evoluciona el programa
+
+## 3. Las cinco grandes áreas de profundización
+
+- Esta sección depende de la tercera fase y merece un bloque propio, porque da densidad real al programa.
+- Las cinco áreas son:
+  - Descriptiva: comprensiones fundamentales sobre la realidad espiritual
+  - Mentalidad: transformación de la forma de pensar del buscador
+  - Energía: reconocimiento y trabajo consciente con energías sutiles
+  - Conciencia: expansión de la percepción y acceso a realidades multidimensionales
+  - Sistemas: estudio de herramientas como astrología, numerología, cábala, tarot o geometría sagrada
+- Conviene tratarlas como campos de trabajo del programa, no como lista decorativa.
+- Formato sugerido: 5 cards o una matriz visual clara.
+
+## 4. Cómo se trabaja el contenido dentro del curso
+
+- Esta sección debe traducir el documento fuente a una experiencia de estudio concreta.
+- Ideas que debería recoger:
+  - organización sistemática previa del material
+  - explicación clara y accesible de contenidos complejos
+  - selección pedagógica de enseñanzas
+  - lectura, comentario y desarrollo temático con continuidad
+  - posibilidad de pasar del estudio de cada texto a una visión integradora entre textos
+- Aquí conviene reforzar una idea central:
+  - el valor del curso no está solo en los textos, sino en el trabajo de estructuración, clarificación y armonización que se hace sobre ellos
+- Formato sugerido: lista de principios metodológicos o bloque de cards de método.
+
+## 5. Herramientas y formato de estudio
+
+- Esta es la sección adecuada para explicar las características concretas del producto, sin convertir la página en una ficha técnica.
+- Herramientas a incluir:
+  - grabaciones en video y audio
+  - capítulos temáticos para navegar por partes
+  - reproductor que recuerda dónde te quedaste
+  - subtítulos en varios idiomas
+  - resumen en texto por lección
+  - cuestionario o mini app de preguntas para repasar
+  - marca de lección completada
+  - índice estructurado para orientarte en el conjunto
+- Conviene presentar estas herramientas como soportes para estudiar mejor:
+  - ordenar el recorrido
+  - repasar
+  - fijar ideas
+  - volver a un punto concreto
+  - no perderse en contenidos amplios
+- Aquí también cabe la idea de accesibilidad:
+  - todo el contenido está disponible online
+  - puede seguirse desde cualquier lugar
+
+## 6. Enfoque práctico del programa
+
+- Recuperar una idea que en el documento fuente aparece casi al final, pero que da mucho cuerpo al curso:
+  - el CDE tendrá un enfoque práctico marcado
+  - incluirá ejercicios propuestos por los propios reveladores espirituales
+- Esta sección no tiene que ser larga, pero sí importante.
+- Sirve para evitar que el curso se perciba solo como material expositivo.
+- Formato sugerido: bloque breve de continuidad entre comprensión y práctica.
+
+## 7. Fuentes del CDE
+
+- Esta sección debe conservar la amplitud del documento fuente.
+- Proponer una organización en dos capas:
+
+### Núcleo visible del lanzamiento
+
+- Urantia
+- Seth
+
+### Base amplia del programa
+
+- El Kybalion
+- Ramtha
+- Un Curso de Milagros
+- Un Curso de Amor
+- Conversaciones con Jeshua
+- Conversaciones con Dios
+- Kryon
+- Tobías
+- Adamus
+
+### Otras fuentes que también nutren el enfoque
+
+- Tradiciones esotéricas y ocultistas
+- Espiritualidad oriental
+- Enseñanzas de grandes maestros
+- Información canalizada
+- Comunicaciones de origen no humano en misión de ayuda a la Tierra
+
+- Cierre conceptual de la sección:
+  - el espíritu del CDE es inclusivo, evolutivo y en expansión
+  - está abierto a incorporar nuevas revelaciones que aporten comprensión y luz al camino espiritual
+- Formato sugerido: listas agrupadas o tabs por familias de fuentes.
+
+## 8. Cierre breve
+
+- El cierre debería resumir la idea central de la página:
+  - el CDE no es solo una colección de contenidos
+  - es un programa de estudio, integración y profundización construido sobre una arquitectura clara
+- Si se añade CTA, que sea discreto y único:
+  - `Ver membresía`
+  - o `Explorar series y lecciones`
+- No hace falta repetir aquí varios caminos de acceso.
+
+## Observaciones editoriales
+
+- Las secciones útiles de la versión anterior no desaparecen, sino que quedan absorbidas en un marco más correcto:
+  - el método queda dentro de la lógica de las fases
+  - las herramientas quedan como sección de soporte al estudio
+  - la armonización gana peso real dentro de la fase 2
+- Conviene evitar en esta página:
+  - hero de conversión
+  - listado largo de objeciones
+  - rutas de decisión tipo landing
+  - exceso de mensajes de autoridad o prueba social
+- La pregunta que esta página debe responder es:
+  - `¿Qué programa es este, cómo está planteado y con qué profundidad trabaja?`
