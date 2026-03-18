@@ -1,17 +1,17 @@
 ---
-title: "Informe 0010 — Auditoria de rendimiento en produccion y flujo de membresia"
+title: "Informe 0010 — Auditoría de rendimiento en producción y flujo de membresía"
 order: 10
-summary: "Medicion actual de rendimiento del sitio en produccion con FastCGI cache activo, auditoria del flujo publico y dinamico de membresia, y hallazgos tecnicos y operativos antes del lanzamiento."
+summary: "Medición actual de rendimiento del sitio en producción con FastCGI cache activo, auditoría del flujo público y dinámico de membresía, y hallazgos técnicos y operativos antes del lanzamiento."
 ---
 
 ## Contexto
 
 - Fecha de referencia: `2026-03-18`
-- Entorno auditado: `produccion`
-- Politica activa de FastCGI cache:
-  - paginas publicas cacheables
+- Entorno auditado: `producción`
+- Política activa de FastCGI cache:
+  - páginas públicas cacheables
   - `duration: 30s`
-  - exclusiones previstas para `wp-json`, `login`, `cuenta de membresia`, `pago de membresia` y `confirmacion de membresia`
+  - exclusiones previstas para `wp-json`, `login`, `cuenta de membresía`, `pago de membresía` y `confirmación de membresía`
 - URLs auditadas:
   - `/`
   - `/curso-de-desarrollo-espiritual/`
@@ -24,17 +24,17 @@ summary: "Medicion actual de rendimiento del sitio en produccion con FastCGI cac
 
 ---
 
-## Metodologia
+## Metodología
 
 - Mediciones de `TTFB` y tiempo total con `curl` en series repetidas.
-- Verificacion de estado de caché por cabecera `fastcgi-cache`.
+- Verificación de estado de caché por cabecera `fastcgi-cache`.
 - Lighthouse desktop headless para `performance score`, `FCP`, `LCP`, `TBT`, `CLS` y `TTFB`.
-- Navegacion real con Playwright sobre `suscripcion` y `checkout mensual`.
-- Revision puntual del `nginx` generado en el servidor para validar el comportamiento real de `skip_cache_uri`.
+- Navegación real con Playwright sobre `suscripción` y `checkout mensual`.
+- Revisión puntual del `nginx` generado en el servidor para validar el comportamiento real de `skip_cache_uri`.
 
 Importante:
-- Las cifras de paginas publicas reflejan experiencia con caché caliente.
-- Las cifras de checkout reflejan ruta dinamica real, fuera de FastCGI cache.
+- Las cifras de páginas públicas reflejan experiencia con caché caliente.
+- Las cifras de checkout reflejan ruta dinámica real, fuera de FastCGI cache.
 
 ---
 
@@ -42,25 +42,25 @@ Importante:
 
 Conclusiones principales:
 
-1. El rendimiento publico en produccion es actualmente muy bueno.
-2. La cache publica esta funcionando bien para `home`, `hub` y `leccion gratuita`.
-3. El flujo dinamico de checkout tambien tiene buen rendimiento para una ruta sin caché.
-4. El flujo de membresia ya tiene las rutas dinamicas clave fuera de FastCGI cache:
+1. El rendimiento público en producción es actualmente muy bueno.
+2. La caché pública está funcionando bien para `home`, `hub` y `lección gratuita`.
+3. El flujo dinámico de checkout también tiene buen rendimiento para una ruta sin caché.
+4. El flujo de membresía ya tiene las rutas dinámicas clave fuera de FastCGI cache:
    - `/login/`
    - `/pago-de-membresia/`
    - `/cuenta-de-membresia/`
 5. Siguen existiendo dos incoherencias de producto visibles en el embudo:
-   - la pagina de `suscripcion` y el `checkout` siguen comunicando `7 dias gratis`
-   - el CTA `Ver leccion gratuita` apunta a `/leccion-gratuita/`, que devuelve `404`
+   - la página de `suscripción` y el `checkout` siguen comunicando `7 días gratis`
+   - el CTA `Ver lección gratuita` apunta a `/leccion-gratuita/`, que devuelve `404`
 
 Prioridad real:
 - no hay un problema urgente de rendimiento del backend
 - el rendimiento ya no es el bloqueo
-- lo pendiente esta en mensaje, ruta y coherencia del embudo
+- lo pendiente está en mensaje, ruta y coherencia del embudo
 
 ---
 
-## 1. Estado actual de la cache
+## 1. Estado actual de la caché
 
 Comportamiento verificado:
 
@@ -93,7 +93,7 @@ Comportamiento verificado:
 
 ---
 
-## 2. Rendimiento de paginas publicas
+## 2. Rendimiento de páginas públicas
 
 ### Home `/`
 
@@ -108,10 +108,10 @@ Comportamiento verificado:
   - `TTFB` auditado: `40 ms`
 
 Lectura:
-- la home publica ya esta en un rango muy bueno
+- la home pública ya está en un rango muy bueno
 - no hay señal de cuello de botella de servidor
 
-### Leccion gratuita `/lecciones-del-cde/seth/quien-es-seth/`
+### Lección gratuita `/lecciones-del-cde/seth/quien-es-seth/`
 
 - `fastcgi-cache`: `HIT` en caliente
 - `TTFB` caliente observado: `~125 ms - 137 ms`
@@ -124,8 +124,8 @@ Lectura:
   - `TTFB` auditado: `39 ms`
 
 Lectura:
-- la pagina de leccion gratuita rinde excelentemente
-- es una buena pieza para trafico frio y para campaña en Telegram
+- la página de lección gratuita rinde excelentemente
+- es una buena pieza para tráfico frío y para campaña en Telegram
 
 ### Hub `/curso-de-desarrollo-espiritual/`
 
@@ -134,9 +134,9 @@ Lectura:
 
 Lectura:
 - no muestra problemas visibles de infraestructura
-- el embudo publico principal puede apoyarse aqui sin riesgo tecnico inmediato
+- el embudo público principal puede apoyarse aquí sin riesgo técnico inmediato
 
-### Suscripcion `/suscripcion/`
+### Suscripción `/suscripcion/`
 
 - `fastcgi-cache`: `STALE`
 - `TTFB` caliente observado: `~125 ms - 130 ms`
@@ -151,12 +151,12 @@ Lectura:
   - trabajo en main thread: `~787 ms`
 
 Lectura:
-- la pagina comercial rinde muy bien
+- la página comercial rinde muy bien
 - no necesita trabajo de rendimiento urgente
 
 ---
 
-## 3. Rendimiento de rutas dinamicas
+## 3. Rendimiento de rutas dinámicas
 
 ### API `wp-json`
 
@@ -165,7 +165,7 @@ Lectura:
 
 Lectura:
 - el backend uncached responde bien
-- no hay indicios de lentitud anomala en REST
+- no hay indicios de lentitud anómala en REST
 
 ### Login `/login/`
 
@@ -182,8 +182,8 @@ Lectura:
   - trabajo en main thread: `~1139 ms`
 
 Lectura:
-- la pagina carga rapido
-- la exclusion de cache esta funcionando correctamente
+- la página carga rápido
+- la exclusión de caché está funcionando correctamente
 
 ### Checkout mensual `/pago-de-membresia/?pmpro_level=11`
 
@@ -200,13 +200,13 @@ Lectura:
   - trabajo en main thread: `~1239 ms`
 
 Lectura:
-- para una ruta dinamica con sesion y formulario, el rendimiento es bueno
-- el checkout es claramente mas pesado que las paginas publicas, pero no esta en una zona preocupante
+- para una ruta dinámica con sesión y formulario, el rendimiento es bueno
+- el checkout es claramente más pesado que las páginas públicas, pero no está en una zona preocupante
 - no hay evidencia de una lentitud estructural del backend
 
 ---
 
-## 4. Auditoria del flujo de membresia
+## 4. Auditoría del flujo de membresía
 
 ### Flujo verificado
 
@@ -215,31 +215,31 @@ Flujo auditado:
 `/suscripcion/ -> /pago-de-membresia/?pmpro_level=11`
 
 Estado:
-- navegacion correcta
+- navegación correcta
 - checkout carga correctamente
-- el formulario de alta y consentimiento esta presente
+- el formulario de alta y consentimiento está presente
 - no se detectaron errores de consola en la carga inspeccionada
 
-### Observacion importante de mensaje comercial
+### Observación importante de mensaje comercial
 
-En la pagina de `suscripcion` y en el `checkout mensual` sigue mostrandose esta propuesta:
+En la página de `suscripción` y en el `checkout mensual` sigue mostrándose esta propuesta:
 
-- `7 dias gratis`
+- `7 días gratis`
 - `el primer cobro al terminar la prueba`
 
 Esto no encaja con la salida de beta gratuita planteada para el lanzamiento si el acceso principal de campaña se va a articular con cupón.
 
 Impacto:
 - el rendimiento es bueno
-- pero el mensaje visible del embudo no esta alineado con la oferta de beta
+- pero el mensaje visible del embudo no está alineado con la oferta de beta
 
 ---
 
 ## 5. Hallazgos operativos no estrictamente de rendimiento
 
-### A. CTA roto a leccion gratuita
+### A. CTA roto a lección gratuita
 
-La pagina de `suscripcion` enlaza a:
+La página de `suscripción` enlaza a:
 
 - `/leccion-gratuita/`
 
@@ -249,42 +249,42 @@ Estado verificado:
 
 Impacto:
 - rompe una salida clave del embudo
-- introduce friccion justo en una CTA visible en la landing comercial
+- introduce fricción justo en una CTA visible en la landing comercial
 
-### B. Desalineacion entre oferta beta y copy visible
+### B. Desalineación entre oferta beta y copy visible
 
 Textos visibles actualmente:
-- `El plan mensual incluye 7 dias gratis`
+- `El plan mensual incluye 7 días gratis`
 - `Empieza con 7 días gratis en cualquier plan`
-- `Incluye 7 dias de prueba gratuita`
+- `Incluye 7 días de prueba gratuita`
 
 Impacto:
 - aunque el sistema de cupones exista, el mensaje visible del embudo no comunica la propuesta real de la beta
-- puede generar confusión en Telegram, en suscripcion y en checkout
+- puede generar confusión en Telegram, en suscripción y en checkout
 
 ---
 
-## 6. Valoracion general
+## 6. Valoración general
 
-### Lo que esta bien
+### Lo que está bien
 
-- la home publica rinde muy bien
-- la leccion gratuita rinde de forma excelente
-- el hub y la pagina de suscripcion estan en muy buen estado
+- la home pública rinde muy bien
+- la lección gratuita rinde de forma excelente
+- el hub y la página de suscripción están en muy buen estado
 - `wp-json` responde bien sin caché
-- el checkout mensual rinde bien para una ruta dinamica real
-- la politica general de caché publica es correcta
+- el checkout mensual rinde bien para una ruta dinámica real
+- la política general de caché pública es correcta
 
-### Lo que no bloquearia el lanzamiento por rendimiento
+### Lo que no bloquearía el lanzamiento por rendimiento
 
-- no hay sintomas de backend lento
+- no hay síntomas de backend lento
 - no hay un problema global de servidor
-- no hay indicios de que la app necesite otra ronda de optimizacion urgente antes de salir
+- no hay indicios de que la app necesite otra ronda de optimización urgente antes de salir
 
-### Lo que si conviene corregir antes del anuncio
+### Lo que sí conviene corregir antes del anuncio
 
-1. Corregir el CTA `Ver leccion gratuita` que hoy lleva a `404`.
-2. Alinear el copy de `suscripcion` y `checkout` con la oferta real de beta gratuita.
+1. Corregir el CTA `Ver lección gratuita` que hoy lleva a `404`.
+2. Alinear el copy de `suscripción` y `checkout` con la oferta real de beta gratuita.
 
 ---
 
@@ -292,35 +292,35 @@ Impacto:
 
 ### Prioridad 1
 
-Corregir el CTA a leccion gratuita:
+Corregir el CTA a lección gratuita:
 - o crear la URL esperada
-- o apuntar el enlace a la leccion gratuita real disponible
+- o apuntar el enlace a la lección gratuita real disponible
 
 ### Prioridad 2
 
-Actualizar el copy visible del funnel para que la oferta de beta no compita con el mensaje heredado de `7 dias gratis`.
+Actualizar el copy visible del funnel para que la oferta de beta no compita con el mensaje heredado de `7 días gratis`.
 
 ### Prioridad 3
 
-Mantener la politica de caché publica actual para:
+Mantener la política de caché pública actual para:
 - home
 - hub
-- lecciones publicas
-- suscripcion
+- lecciones públicas
+- suscripción
 
-Con el rendimiento actual, esa capa de caché esta aportando valor y no oculta un backend deficiente.
+Con el rendimiento actual, esa capa de caché está aportando valor y no oculta un backend deficiente.
 
 ---
 
 ## Conclusión final
 
-El sitio esta en un buen estado de rendimiento para lanzamiento:
+El sitio está en un buen estado de rendimiento para lanzamiento:
 
-- las paginas publicas ya estan en un rango excelente
-- el checkout dinamico responde bien
+- las páginas públicas ya están en un rango excelente
+- el checkout dinámico responde bien
 - la infraestructura no muestra cuellos de botella preocupantes
 
-Los ajustes pendientes no son principalmente de rendimiento bruto, sino de correccion de politica y coherencia del embudo:
+Los ajustes pendientes no son principalmente de rendimiento bruto, sino de corrección de política y coherencia del embudo:
 
-- arreglar el CTA roto a la leccion gratuita
-- alinear el mensaje comercial de la beta con lo que hoy ve el usuario en `suscripcion` y `checkout`
+- arreglar el CTA roto a la lección gratuita
+- alinear el mensaje comercial de la beta con lo que hoy ve el usuario en `suscripción` y `checkout`
