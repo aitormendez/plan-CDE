@@ -1,0 +1,213 @@
+---
+title: "Informe 0008 — Plan de medicion basica en Matomo"
+order: 8
+summary: "Plan operativo con checklist de paginas, eventos y objetivos minimos a medir en el embudo publico del CDE."
+---
+
+# Informe 0008 - Plan de medicion basica en Matomo
+
+## Objetivo
+
+Definir un plan minimo y accionable de medicion para el embudo publico del CDE en Matomo.
+
+La prioridad no es medir muchas cosas, sino medir bien:
+- entradas,
+- pasos de consideracion,
+- pasos de intencion,
+- conversion final.
+
+---
+
+## 1. Embudo base a medir
+
+Embudo recomendado:
+
+`Hub CDE -> Leccion gratuita / Suscripcion / Indice -> Checkout -> Confirmacion`
+
+Via secundaria:
+
+`Hub CDE -> Telegram`
+
+Paginas implicadas:
+- `/curso-de-desarrollo-espiritual/`
+- `/leccion-gratuita/`
+- `/suscripcion/`
+- `/indice-de-lecciones/`
+- `/el-curso-en-profundidad/`
+- `/pago-de-membresia/`
+- `/confirmacion-de-membresia/`
+
+---
+
+## 2. Checklist tecnica base
+
+- [ ] Confirmar que `staging` usa un `siteId` propio en Matomo.
+- [ ] Validar que el snippet carga solo con consentimiento analitico.
+- [ ] Comprobar en "Visitors in Real-time" que las pageviews entran desde staging.
+- [ ] Verificar que Matomo registra correctamente `utm_source`, `utm_medium`, `utm_campaign` y `utm_content`.
+- [ ] Excluir del analisis el trafico interno del equipo si hace falta.
+- [ ] Asegurar que checkout y confirmacion pertenecen al mismo sitio medido.
+
+---
+
+## 3. Paginas prioritarias
+
+### A. Captacion y entrada
+
+- [ ] Medir pageviews de `/curso-de-desarrollo-espiritual/`.
+  Pagina principal de entrada al CDE desde redes, YouTube y Telegram.
+
+- [ ] Medir pageviews de `/leccion-gratuita/`.
+  Microconversion principal para usuarios frios o todavia no listos para suscribirse.
+
+### B. Consideracion
+
+- [ ] Medir pageviews de `/suscripcion/`.
+  Pagina principal de decision comercial.
+
+- [ ] Medir pageviews de `/indice-de-lecciones/`.
+  Pagina de orientacion y exploracion antes de decidir.
+
+- [ ] Medir pageviews de `/el-curso-en-profundidad/`.
+  Pagina de profundizacion para usuarios que necesitan mas contexto y validacion.
+
+### C. Intencion y conversion
+
+- [ ] Medir pageviews de `/pago-de-membresia/`.
+  Paso de alta intencion; debe tratarse como microconversion clave.
+
+- [ ] Medir pageviews de `/confirmacion-de-membresia/`.
+  Conversion final; debe tratarse como macroconversion principal.
+
+---
+
+## 4. Eventos minimos por pagina
+
+### Hub CDE `/curso-de-desarrollo-espiritual/`
+
+- [ ] Medir clic en `Ver leccion gratuita`.
+- [ ] Medir clic en `Suscripcion`.
+- [ ] Medir clic en `Explorar series y lecciones`.
+- [ ] Medir clic en `Unirme a Telegram`.
+
+Eventos sugeridos:
+- Categoria: `CDE Hub`
+- Acciones:
+  - `click_leccion_gratuita`
+  - `click_suscripcion`
+  - `click_indice`
+  - `click_telegram`
+
+### Suscripcion `/suscripcion/`
+
+- [ ] Medir clic en `Elegir plan` hacia `#planes`.
+- [ ] Medir clic en `Ver leccion gratuita`.
+- [ ] Medir clic en cada CTA de plan hacia checkout.
+
+Eventos sugeridos:
+- Categoria: `CDE Suscripcion`
+- Acciones:
+  - `click_elegir_plan`
+  - `click_leccion_gratuita`
+  - `click_checkout_mensual`
+  - `click_checkout_semestral`
+  - `click_checkout_anual`
+
+### Programa `/el-curso-en-profundidad/`
+
+- [ ] Medir clic en `Explorar series y lecciones`.
+
+Evento sugerido:
+- Categoria: `CDE Programa`
+- Accion: `click_indice`
+
+### Indice `/indice-de-lecciones/`
+
+- [ ] Medir apertura de serie.
+- [ ] Medir clic en bloque o tema si se quiere analizar exploracion real.
+
+Nota:
+- Este punto es util como evento de engagement, no como goal principal.
+
+Eventos sugeridos:
+- Categoria: `CDE Indice`
+- Acciones:
+  - `open_serie`
+  - `click_bloque`
+  - `click_tema`
+
+### Leccion gratuita `/leccion-gratuita/`
+
+- [ ] Medir CTA principal hacia suscripcion si existe.
+- [ ] Medir CTA hacia Telegram si existe.
+- [ ] Medir reproduccion de video o scroll profundo solo si el desarrollo es sencillo.
+
+Evento sugerido:
+- Categoria: `CDE Leccion gratuita`
+
+---
+
+## 5. Goals minimos en Matomo
+
+- [ ] Crear Goal `Visita a checkout`.
+  Tipo recomendado: destino URL contiene `/pago-de-membresia/`
+
+- [ ] Crear Goal `Suscripcion completada`.
+  Tipo recomendado: destino URL contiene `/confirmacion-de-membresia/`
+
+- [ ] Crear Goal `Click a Telegram`.
+  Tipo recomendado: evento o outlink hacia `t.me`
+
+- [ ] Crear Goal `Visita a leccion gratuita`.
+  Tipo recomendado: destino URL contiene `/leccion-gratuita/`
+
+Orden de prioridad:
+1. `Suscripcion completada`
+2. `Visita a checkout`
+3. `Visita a leccion gratuita`
+4. `Click a Telegram`
+
+---
+
+## 6. Lo que no hace falta medir todavia
+
+- [ ] No priorizar paginas legales.
+- [ ] No priorizar paginas de cuenta, facturacion o pedidos como parte del embudo de captacion.
+- [ ] No convertir el indice o la pagina Programa en KPIs principales.
+- [ ] No empezar por scroll, tiempo en pagina o eventos muy finos si antes no estan cerradas las conversiones base.
+
+---
+
+## 7. Orden recomendado de implementacion
+
+### Fase 1. Minimo viable
+
+- [ ] Tracking correcto por pageview en todas las paginas clave.
+- [ ] Goals de `checkout` y `confirmacion`.
+- [ ] Eventos de clic del Hub CDE.
+- [ ] Eventos de clic de planes en Suscripcion.
+
+### Fase 2. Consideracion
+
+- [ ] Goal o segmento especifico para `leccion gratuita`.
+- [ ] Evento de clic final en `Programa`.
+- [ ] Eventos de exploracion en `Indice de lecciones`.
+
+### Fase 3. Afinado
+
+- [ ] Medir scroll profundo en landing o leccion gratuita.
+- [ ] Medir reproduccion de video si aporta una lectura clara del interes.
+- [ ] Crear paneles o segmentos por `utm_campaign` y `utm_content`.
+
+---
+
+## 8. Resultado esperado
+
+Si este plan queda implementado, deberia poder responderse sin ambiguedad a estas preguntas:
+
+- [ ] Que canal trae trafico al hub.
+- [ ] Cuanto trafico llega a leccion gratuita.
+- [ ] Cuanto trafico llega a suscripcion.
+- [ ] Cuanto trafico pasa de suscripcion a checkout.
+- [ ] Cuantas suscripciones completadas genera cada fuente o campana.
+- [ ] Cuanto peso real tiene Telegram como paso intermedio.

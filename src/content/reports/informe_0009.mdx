@@ -1,0 +1,311 @@
+---
+title: "Informe 0009 — Estructura de objetivos para el lanzamiento en producción"
+order: 9
+summary: "Propuesta de objetivos Matomo para producción, priorizada para el periodo de pruebas con anuncio en Telegram y acceso gratuito mediante cupón."
+---
+
+# Informe 0009 - Estructura de objetivos para el lanzamiento en producción
+
+## Contexto operativo
+
+- Fecha de referencia: `2026-03-17`
+- Lanzamiento público previsto: viernes `2026-03-20`
+- Canal inicial de arranque: mensaje en Telegram
+- Incentivo de acceso: cupón con acceso gratuito durante el periodo de pruebas
+- Estado actual del producto: 12 lecciones publicadas
+- Cadencia prevista: nuevas lecciones cada viernes
+
+Este contexto cambia la lógica de medición:
+- en esta fase, el KPI principal no es el ingreso,
+- el KPI principal es la activación real de acceso,
+- y el segundo KPI es el consumo inicial del contenido.
+
+---
+
+## 1. Principio de medición para esta fase
+
+Durante el periodo de pruebas, la estructura de objetivos debe responder a esta pregunta:
+
+`cuánta gente llega, activa el acceso y empieza a usar el curso`
+
+No conviene sobrediseñar la medición todavía.
+
+La jerarquía correcta para esta fase es:
+1. Activación de acceso
+2. Intención fuerte
+3. Consumo inicial
+4. Exploración y consideración
+
+---
+
+## 2. URLs reales verificadas en producción
+
+URLs públicas relevantes comprobadas:
+- `/curso-de-desarrollo-espiritual/`
+- `/suscripcion/`
+- `/indice-de-lecciones/`
+- `/el-curso-en-profundidad/`
+- `/pago-de-membresia/`
+- `/pago-de-membresia/confirmacion-de-membresia/`
+- `/lecciones-del-cde/urantia/que-es-el-libro-de-urantia/`
+
+Nota importante:
+- `/leccion-gratuita/` devuelve `404` en producción, así que no debe entrar en el esquema principal de objetivos de este lanzamiento.
+
+---
+
+## 3. Estructura de objetivos recomendada
+
+### Objetivo 1. Activación completada
+
+Nombre recomendado:
+- `Activación completada`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/pago-de-membresia/confirmacion-de-membresia/`
+
+Prioridad:
+- máxima
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/pago-de-membresia/confirmacion-de-membresia/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- este es el macro objetivo principal del periodo de pruebas
+- no mide pago neto
+- mide que una persona ha completado correctamente el alta de acceso
+
+### Objetivo 2. Checkout iniciado
+
+Nombre recomendado:
+- `Checkout iniciado`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/pago-de-membresia/`
+
+Prioridad:
+- muy alta
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/pago-de-membresia/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- mide intención fuerte
+- permite saber si el mensaje de Telegram y la landing empujan hacia el alta
+
+### Objetivo 3. Primera lección vista
+
+Nombre recomendado:
+- `Primera lección vista`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/lecciones-del-cde/`
+
+Prioridad:
+- muy alta
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/lecciones-del-cde/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- este objetivo mide activación de uso, no solo activación de acceso
+- durante un periodo de pruebas con acceso gratis, esta es una métrica más valiosa que el pago
+
+### Objetivo 4. Página de suscripción visitada
+
+Nombre recomendado:
+- `Suscripción visitada`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/suscripcion/`
+
+Prioridad:
+- alta
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/suscripcion/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- mide consideración comercial
+- permite ver si el tráfico pasa por la página de decisión antes del checkout
+
+### Objetivo 5. Índice de lecciones visitado
+
+Nombre recomendado:
+- `Índice de lecciones visitado`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/indice-de-lecciones/`
+
+Prioridad:
+- media
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/indice-de-lecciones/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- ayuda a entender si el usuario explora el catálogo antes de decidirse
+
+### Objetivo 6. Programa visitado
+
+Nombre recomendado:
+- `Programa visitado`
+
+Tipo:
+- visita a una URL dada
+
+Regla:
+- URL contiene `/el-curso-en-profundidad/`
+
+Prioridad:
+- media
+
+Configuración recomendada en Matomo:
+- condición: `URL contiene`
+- patrón: `/el-curso-en-profundidad/`
+- conversiones por visita: `solo una vez por visita`
+
+Sentido:
+- sirve para detectar una ruta de profundización más racional o analítica
+- no debe tratarse como KPI principal
+
+---
+
+## 4. Lo que no debe tratarse como objetivo en esta fase
+
+- `Hub CDE`:
+  - `/curso-de-desarrollo-espiritual/` debe leerse como página de entrada, no como objetivo
+- clics internos de CTA:
+  - solo merecen pasar a objetivo cuando se instrumenten como eventos con nombre propio
+- páginas legales:
+  - no aportan lectura de negocio
+- Telegram:
+  - en esta fase interesa más medirlo por `utm_source=telegram` que como objetivo desde la web
+
+---
+
+## 5. Orden de implementación recomendado
+
+### Fase A. Mínimo imprescindible para el viernes 2026-03-20
+
+- [ ] `Activación completada`
+- [ ] `Checkout iniciado`
+- [ ] `Primera lección vista`
+
+### Fase B. Lectura del embudo
+
+- [ ] `Suscripción visitada`
+- [ ] `Índice de lecciones visitado`
+- [ ] `Programa visitado`
+
+Orden exacto de creación en Matomo:
+1. `Activación completada`
+2. `Checkout iniciado`
+3. `Primera lección vista`
+4. `Suscripción visitada`
+5. `Índice de lecciones visitado`
+6. `Programa visitado`
+
+---
+
+## 6. Lectura recomendada del embudo
+
+Secuencia principal a leer:
+
+`Telegram -> Hub CDE -> Suscripción -> Checkout iniciado -> Activación completada -> Primera lección vista`
+
+Preguntas que esta estructura debe poder responder:
+- cuántas visitas vienen del anuncio de Telegram
+- cuántas llegan a la página de suscripción
+- cuántas inician checkout
+- cuántas completan el alta
+- cuántas empiezan a consumir una lección
+
+---
+
+## 7. Convención mínima de UTMs para el anuncio de Telegram
+
+Para el mensaje del viernes `2026-03-20`, usar una URL con UTMs estables.
+
+Recomendación:
+- `utm_source=telegram`
+- `utm_medium=community`
+- `utm_campaign=cde_beta_20260320`
+- `utm_content=anuncio_lanzamiento_01`
+
+Si luego hay mensajes semanales cada viernes para nuevas lecciones:
+- mantener `utm_source=telegram`
+- mantener `utm_medium=community`
+- cambiar `utm_campaign` por ola o fase
+- cambiar `utm_content` por pieza concreta
+
+Ejemplo posterior:
+- `utm_campaign=cde_beta_followup_20260327`
+- `utm_content=nueva_leccion_urantia_01`
+
+---
+
+## 8. KPI principal y secundarios
+
+### KPI principal de esta fase
+
+- `Activación completada`
+
+### KPI secundarios
+
+- `Checkout iniciado`
+- `Primera lección vista`
+
+### KPI de apoyo
+
+- `Suscripción visitada`
+- `Índice de lecciones visitado`
+- `Programa visitado`
+
+Interpretación correcta:
+- si sube `Checkout iniciado` pero no sube `Activación completada`, la fricción está en el alta
+- si sube `Activación completada` pero no sube `Primera lección vista`, el problema está en onboarding o uso inicial
+- si sube `Suscripción visitada` pero no `Checkout iniciado`, falla la propuesta o el CTA
+
+---
+
+## 9. Recomendación operativa final
+
+No conviene definir todavía una estructura "final" de negocio como si el producto estuviera ya en régimen normal.
+
+Para esta fase de pruebas, la estructura sólida es:
+1. medir activación
+2. medir paso a checkout
+3. medir primer uso real
+4. segmentar por Telegram con UTMs
+
+Cuando termine el periodo de pruebas, entonces sí convendrá pasar a una estructura de producción estable basada en:
+- conversión a suscripción pagada
+- activación por plan
+- consumo recurrente
+- retención entre viernes de publicación
