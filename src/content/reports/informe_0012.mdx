@@ -1,17 +1,17 @@
 ---
-title: "Informe 0012 — Estado actual de cuentas, paneles y enlaces operativos"
+title: "Informe 0012 — Estado actual de cuentas, paneles y publicación automatizada"
 order: 12
-summary: "Inventario operativo de cuentas y paneles activos de Espacio Sutil, estado de sus vinculaciones y tareas pendientes de verificación para publicación y automatización."
+summary: "Estado funcional de las cuentas activas de Espacio Sutil, sus paneles de gestión y la operativa actual de publicación automatizada en YouTube e Instagram."
 ---
 
 ## Contexto
 
-- Fecha de referencia: `2026-03-27`
+- Fecha de referencia: `2026-04-05`
 - Alcance del informe:
-  - documentar las cuentas activas ya abiertas
-  - registrar los paneles y enlaces de trabajo relevantes
-  - dejar constancia del estado actual de las vinculaciones
-  - identificar los bloqueos pendientes
+  - reflejar el estado operativo actual de las cuentas activas
+  - registrar los paneles de trabajo relevantes
+  - resumir la situación de la publicación automatizada
+  - identificar los frentes todavía pendientes
 
 ---
 
@@ -19,16 +19,23 @@ summary: "Inventario operativo de cuentas y paneles activos de Espacio Sutil, es
 
 Estado actual:
 
-- `Facebook` ya dispone de una página pública de `Espacio Sutil`
-- `Instagram` ya está creada, convertida en `cuenta profesional` y vinculada correctamente a la página de Facebook
-- `TikTok` ya dispone de cuenta pública y de `TikTok Business Center`
-- `YouTube` mantiene la cuenta histórica activa
-- `NocoDB` y `n8n` quedan registrados como panel editorial y capa de automatización operativa
+- `Facebook` dispone de página pública operativa de `Espacio Sutil`
+- `Instagram` está activa como cuenta profesional y vinculada correctamente al ecosistema de `Meta`
+- `TikTok` dispone de cuenta pública y de `TikTok Business Center`
+- `YouTube` mantiene el canal principal activo y ya admite publicación automatizada operativa
+- `NocoDB` y `n8n` funcionan como base editorial y capa de automatización
 
-Bloqueos pendientes:
+Estado de la automatización:
 
-1. Completar la verificación que permita publicar `Shorts` en `YouTube` en modo `publish`, en lugar de `private`.
-2. Completar la verificación de empresa en `TikTok`, actualmente detenida tras rechazo inicial y a la espera de aportar o tramitar el registro de empresa.
+- la publicación de `Instagram Reels` ya está operativa
+- la publicación de `YouTube Shorts` ya está operativa
+- en `YouTube`, el flujo ya publica título, descripción, visibilidad y miniatura
+- en `Instagram`, el flujo ya publica vídeo, caption y portada
+
+Frentes todavía abiertos:
+
+1. La revisión de acceso a datos de la app de `Google` sigue en curso.
+2. La verificación empresarial de `TikTok` sigue pendiente.
 
 ---
 
@@ -39,7 +46,7 @@ Bloqueos pendientes:
 Estado:
 
 - Existe una página pública activa de `Espacio Sutil`
-- La página ya está operativa como activo de marca en `Meta`
+- La página funciona como activo principal dentro del ecosistema de `Meta`
 
 Enlace:
 
@@ -49,9 +56,10 @@ Enlace:
 
 Estado:
 
-- La cuenta de `Instagram` ya está creada
-- La cuenta ya ha sido convertida a `cuenta profesional`
-- La cuenta ya está vinculada correctamente a la página de `Facebook`
+- La cuenta de `Instagram` está activa
+- La cuenta ya está configurada como `cuenta profesional`
+- La cuenta está vinculada correctamente a la página de `Facebook`
+- La publicación automatizada de `Reels` ya es funcional
 
 Enlace:
 
@@ -61,7 +69,7 @@ Enlace:
 
 Estado:
 
-- La cuenta pública de `TikTok` ya está creada
+- La cuenta pública de `TikTok` está creada
 - Existe `TikTok Business Center` operativo
 - La verificación empresarial de `TikTok` sigue pendiente de resolución
 
@@ -74,8 +82,10 @@ Enlaces:
 
 Estado:
 
-- Se mantiene la cuenta histórica habitual como canal principal ya existente
-- El bloqueo no está en la existencia de la cuenta, sino en la verificación para publicación de `Shorts` en modo público automatizado
+- El canal principal de `YouTube` sigue activo como cuenta histórica de referencia
+- La publicación automatizada de `Shorts` ya está operativa
+- El flujo actual ya aplica título, descripción, visibilidad y miniatura
+- La app de `Google` que respalda esta integración está en producción y su revisión de acceso a datos sigue en curso
 
 Enlace:
 
@@ -97,11 +107,23 @@ Enlace:
 
 - Meta Business Suite: [https://business.facebook.com/latest/home?asset_id=1052398181288195&business_id=948748444272613](https://business.facebook.com/latest/home?asset_id=1052398181288195&business_id=948748444272613)
 
+### Google Cloud
+
+Función:
+
+- gestión de la app OAuth usada para la publicación automatizada en `YouTube`
+- revisión del estado de producción y del proceso de verificación
+
+Enlace:
+
+- Google Cloud Console: [https://console.cloud.google.com/welcome?project=espacio-sutil](https://console.cloud.google.com/welcome?project=espacio-sutil)
+
 ### NocoDB
 
 Función:
 
-- panel editorial y base de datos operativa para planificación de contenidos
+- base editorial operativa para registrar tareas de distribución por canal
+- control de estados de publicación, errores y enlaces externos
 
 Enlace:
 
@@ -111,7 +133,8 @@ Enlace:
 
 Función:
 
-- capa de automatización y orquestación de flujos
+- capa de automatización y orquestación de flujos de publicación
+- ejecución de las ramas activas de `YouTube Shorts` e `Instagram Reels`
 
 Enlace:
 
@@ -119,30 +142,69 @@ Enlace:
 
 ---
 
-## 3. Estado de las vinculaciones
+## 3. Estado de las vinculaciones y automatizaciones
 
 Vinculaciones ya resueltas:
 
 - `Instagram Espacio Sutil` vinculada a la página de `Facebook Espacio Sutil`
 - `TikTok` separada como cuenta de marca específica
-- `TikTok Business Center` ya creado como panel empresarial de referencia
+- `TikTok Business Center` creado como panel empresarial de referencia
+- `NocoDB` y `n8n` funcionando como base editorial y capa de automatización
+- publicación automatizada ya operativa en `Instagram Reels`
+- publicación automatizada ya operativa en `YouTube Shorts`
 
-Vinculaciones o capacidades aún no resueltas:
+Capacidades todavía en seguimiento:
 
-- publicación automatizada de `YouTube Shorts` en modo público
+- revisión de acceso a datos de la app de `Google` para la integración con `YouTube`
 - verificación empresarial de `TikTok`
 
 ---
 
-## 4. Tareas pendientes
+## 4. Estado operativo de publicación
 
-### Pendiente 1
+### Instagram Reels
 
-Completar la verificación necesaria para que la automatización de `YouTube Shorts` publique en modo `publish` y no en modo `private`.
+Estado:
+
+- el flujo ya resuelve el vídeo a publicar desde la estructura editorial
+- si existe adaptación del canal, la usa
+- si no existe, puede recurrir al recurso maestro
+- el flujo publica caption y portada del Reel
 
 Implicación operativa:
 
-- sin esta verificación, la automatización no puede cerrar el flujo completo de publicación pública en `YouTube`
+- `Instagram` ya forma parte del circuito real de distribución automatizada
+
+### YouTube Shorts
+
+Estado:
+
+- el flujo ya publica vídeos en `YouTube Shorts`
+- el flujo ya gestiona visibilidad mediante `privacy_status`
+- el flujo ya publica descripción y miniatura
+- la integración OAuth de `Google` está operativa mientras se completa la revisión
+
+Implicación operativa:
+
+- `YouTube` ya forma parte del circuito real de distribución automatizada
+
+---
+
+## 5. Pendientes actuales
+
+### Pendiente 1
+
+Completar la revisión de acceso a datos de la app de `Google` utilizada para `YouTube`.
+
+Estado actual:
+
+- la app ya está en producción
+- la información de marca ya fue verificada y publicada
+- la revisión de acceso a datos sigue en curso
+
+Implicación operativa:
+
+- la automatización ya funciona, pero la revisión sigue siendo el frente administrativo abierto en `Google`
 
 ### Pendiente 2
 
@@ -151,24 +213,24 @@ Retomar y completar la verificación de empresa en `TikTok`.
 Estado actual:
 
 - la verificación fue rechazada inicialmente
-- el proceso está pendiente de continuar mediante aportación o tramitación del registro de empresa
+- el proceso está pendiente de continuar con la documentación o tramitación correspondiente
 
 Implicación operativa:
 
-- sin esta validación, algunas capacidades empresariales de `TikTok` pueden quedar limitadas o sujetas a revisión
+- algunas capacidades empresariales de `TikTok` pueden seguir limitadas o sujetas a revisión
 
 ---
 
-## 5. Conclusión operativa
+## 6. Conclusión operativa
 
-La infraestructura básica de presencia en redes para `Espacio Sutil` ya está creada y articulada:
+La presencia de `Espacio Sutil` en redes y sus paneles de gestión ya está articulada en un estado funcional:
 
-- `Facebook` y `Instagram` ya están enlazadas correctamente dentro del ecosistema `Meta`
-- `TikTok` ya tiene tanto cuenta pública como panel empresarial
-- `YouTube` sigue siendo el canal histórico activo
-- `NocoDB` y `n8n` ya quedan identificados como piezas de soporte editorial y de automatización
+- `Facebook` e `Instagram` están correctamente vinculadas dentro de `Meta`
+- `TikTok` dispone de cuenta pública y panel empresarial
+- `YouTube` mantiene el canal activo y ya se integra con la automatización
+- `NocoDB` y `n8n` sostienen la operativa editorial y de publicación
 
-El foco ya no está en abrir nuevas cuentas, sino en cerrar los dos bloqueos que quedan:
+El foco actual ya no está en abrir cuentas ni en validar la viabilidad técnica de publicación, sino en cerrar dos frentes administrativos:
 
-1. `YouTube Shorts` en `publish`
-2. verificación empresarial de `TikTok`
+1. completar la revisión de `Google` sobre la app OAuth de `YouTube`
+2. completar la verificación empresarial de `TikTok`
